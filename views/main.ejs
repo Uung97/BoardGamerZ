@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= locals.title %></title>
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/public/main window.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Board GamerZ</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="file:///C:/Users/hjjh1/Desktop/web-study/Board%20game%20recommendation%20site/main%20window.html?#">만들기 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onclick="">앱</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                알림
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://localhost:3000/login">로그인</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+    <div class="container">
+
+        <div class="jumbotron" id="main-box">
+            <h1 class="display-4" id="title">Board GamerZ</h1>
+            <p class="lead">보드게임을 하고 싶지만 어떤 보드게임을 해야 하는지 고민되는 분들을 위한 보드게임 추천 사이트 입니다.</p>
+            <hr class="my-4">
+            <p>보드게임을 더욱 자세히 알아보고 싶다면?</p>
+            <a class="btn btn-primary btn-lg" href="https://www.koreaboardgames.com/boardgame/game_list01.php#pagenum=1&view_type=bg&search_checkbox1%5B%5D=A001A002A003&search_sort=" role="button">코리아 보드게임즈 가기</a>
+        </div>
+
+        <ul class="bbsList04" id="game-list">
+            
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+
+    <script>
+
+        $(document).ready(function(){
+            console.log("웹페이지 시작")
+
+            $.ajax({
+                url:`/data/read`,
+                data:{},
+                type:"GET",
+                success:function(json){
+                    console.log(json)
+
+                    $("#game-list").html('')
+                    let game_list = json.data
+
+                    for (let index = 0; index < game_list.length; index++) {
+                      let str1 = game_list[index].min_time;
+                      let str2 = game_list[index].max_time;
+                      let card;
+                      if(str1 == str2){
+                        card = `<li>
+                            <div class="card">
+                                <img src="${'https://www.koreaboardgames.com/upload/uploaded/prd/' + game_list[index].poster_path}" class="card-img-top">
+                                <div class="card-body">
+                                  <h5 class="game-title">${game_list[index].title}</h5>
+
+                                  <table class="game-contents" style="width: 100%;">
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">게임 장르</th>
+                                        <td style="text-align: right;">${game_list[index].genre_id}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">게임 인원</th>
+                                        <td style="text-align: right;">${game_list[index].min_num + '명-' + game_list[index].max_num + '명'}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">게임 시간</th>
+                                        <td style="text-align: right;">${game_list[index].max_time + '분'}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">게임 가격</th>
+                                        <td style="text-align: right;">${game_list[index].price + '원'}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                                </div>
+                            </div>
+                        </li>`
+                      } else {
+                        card = `<li>
+                            <div class="card">
+                                <img src="${'https://www.koreaboardgames.com/upload/uploaded/prd/' + game_list[index].poster_path}" class="card-img-top">
+                                <div class="card-body">
+                                  <h5 class="game-title">${game_list[index].title}</h5>
+
+                                  <table class="game-contents" style="width: 100%;">
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">게임 장르</th>
+                                        <td style="text-align: right;">${game_list[index].genre_id}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">게임 인원</th>
+                                        <td style="text-align: right;">${game_list[index].min_num + '명-' + game_list[index].max_num + '명'}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">게임 시간</th>
+                                        <td style="text-align: right;">${game_list[index].min_time + '분-' + game_list[index].max_time + '분'}</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">게임 가격</th>
+                                        <td style="text-align: right;">${game_list[index].price + '원'}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+
+                                </div>
+                            </div>
+                        </li>`
+                      }
+                        
+
+                        
+                        $("#game-list").append(card)
+                    }
+                },
+                error:function(json){
+
+                }
+            })
+        })
+
+        function login() {
+            
+        }
+        
+    </script>
+
+</body>
+</html>

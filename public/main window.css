@@ -1,0 +1,97 @@
+.container {
+    max-width: 1240px;
+}
+
+#main-box {
+    margin-top: 10px;
+    background-color: rgb(167, 223, 255);
+}
+
+#title {
+    font-family: 'Oswald', sans-serif !important;
+    margin-top: 10px !important;
+}
+
+.lead {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.jumbotron{
+    padding-top: 1rem !important;
+}
+
+.row {
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+}
+
+.col {
+    margin-bottom: 15px;
+}
+
+.card {
+    border-radius: 0rem !important;
+    height: 100% !important;
+    word-break: keep-all;
+    overflow: hidden;
+}
+
+.card-body {
+    border: 1px solid rgba(133, 133, 133, .125);
+}
+
+.card-img-top {
+    max-width: 10cm;
+    max-height: 10cm;
+    border: 1px solid rgba(133, 133, 133, .125);
+}
+
+.game-title {
+    font-family: 'Do Hyeon', sans-serif;
+    font-size: 24px;
+    height: 48px;
+}
+
+.game-contents {
+    font-family: 'Noto Sans KR', sans-serif;
+    word-break: keep-all;
+    font-size: 14px;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+
+ul {
+    padding-inline-start: 0px !important;
+}
+
+.bbsList04{
+    overflow: hidden;
+    margin: 30px -5px 40px;
+}
+
+.bbsList04 li{
+    float: left;
+    width: 20%;
+    padding: 0 5px;
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 1130px) {
+    .bbsList04 li {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width: 925px) {
+    .bbsList04 li {
+        width: 33.3%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .bbsList04 li {
+        width: 50%;
+    }
+}
