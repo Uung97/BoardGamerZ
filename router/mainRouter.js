@@ -11,6 +11,10 @@ router.get("/login", function(req,res){
     res.render('login', {title:"로그인"})
 })
 
+router.get("/signup", function(req,res){
+    res.render('signup', {title:"회원가입"})
+})
+
 router.post("/data/create", function(req,res){
     let game_id = parseInt(Math.random() * 10000);
     let genre_id = req.body.genre_id;

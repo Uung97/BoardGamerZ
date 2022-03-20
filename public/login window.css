@@ -15,10 +15,39 @@ h1 {
 
 .jumbotron {
     background-color: rgb(167, 223, 255);
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
     margin-top: 2rem;
     border-radius: 20px;
+}
+
+ol, ul, li {
+    list-style: none;
+}
+
+.find_wrap {
+    text-align: center;
+    padding-inline-start: 0px;
+}
+
+.find_wrap li{
+    position: relative;
+    display: inline-block;
+}
+
+.find_wrap li+li{
+    padding-left: 28px;
+}
+
+.find_wrap li+li::before{
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 12px;
+    width: 1px;
+    height: 12px;
+    border-radius: 0.5px;
+    background-color: #dadada;
 }
 
 #login {
